@@ -7,6 +7,7 @@
 
 'use strict';
 
+require('../lib/backbone.computed.js');
 var Backbone = require('../bower_components/backbone/backbone.js');
 
 var attributes = {
@@ -30,6 +31,7 @@ var options = {
 };
 
 var model = new Backbone.Model(attributes, options);
+
 var pass = false;
 try {
 	model.set({fullName: 'FULLNAME'});
