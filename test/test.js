@@ -24,7 +24,7 @@ var options = {
 			],
 			includeInJSON: false,
 			converter: function() {
-				return this.firstName + ' ' + this.lastName;
+				return this.get('firstName') + ' ' + this.get('lastName');
 			}
 		}
 	}
@@ -79,11 +79,14 @@ if (!pass) {
 	throw new Error('change callback did not execute');
 }
 
+model = new Backbone.Model(attributes, options);
 pass = false;
+
 model.on('change:fullName', function(model, attribute, options) {
-	if (attribute !== 'FIRST') {
-		throw new Error ('attribute should be "FIRST" but was "' + attribute + '"');
+	if (attribute !== 'FIRST last') {
+		throw new Error ('attribute should be "FIRST last" but was "' + attribute + '"');
 	}
+	pass = true;
 });
 
 model.set({firstName: 'FIRST'});
