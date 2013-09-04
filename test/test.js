@@ -2,6 +2,9 @@
 // NPM, so there was no way to get supporting files for an actual test library
 // (or for instructions for using same).
 
+// TODO Add a test confirming use of both the options hash on the derived
+// instance hash.
+
 'use strict';
 
 var Backbone = require('../bower_components/backbone/backbone.js');
