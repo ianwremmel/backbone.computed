@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "name": "backbone.computed",
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "devDependencies": {
+    "underscore": "~1.5.2",
+    "backbone": "~1.0.0",
+    "mocha": "~1.12.1"
+  }
+}

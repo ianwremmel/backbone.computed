@@ -8,7 +8,7 @@
 'use strict';
 
 require('../lib/backbone.computed.js');
-var Backbone = require('../bower_components/backbone/backbone.js');
+var Backbone = require('backbone');
 
 var attributes = {
 	firstName: 'first',
