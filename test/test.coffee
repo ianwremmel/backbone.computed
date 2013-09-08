@@ -35,11 +35,17 @@ describe 'Model', ->
 			model.set {fullName: 'FULLNAME'}, {isComputed: true}
 			assert.equal model.get('fullName'), 'FULLNAME'
 
-		it 'should fire the `change` event', ->
+		it 'should fire the `change` event', (done) ->
+			model.on 'change', ->
+				done()
+			model.set firstName: 'FIRST'
 
-		it 'should first the change:<attribute-name> event', ->
+		it 'should fire the change:<attribute-name> event', (done)->
+			model.on 'change:fullName', ->
+				done()
+			model.set firstName: 'FIRST'
 
-		it 'should recompute the value when one of its depencies changes', ->
+		it 'should recompute the value when one of its dependencies changes', ->
 			model.set firstName: 'FIRST'
 			assert.equal model.get('fullName'), 'FIRST last'
 

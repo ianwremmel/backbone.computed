@@ -2,7 +2,7 @@
   "version": "0.0.1",
   "name": "backbone.computed",
   "scripts": {
-    "test": "mocha --compilers coffee:coffee-script --bail test/test.coffee"
+    "test": "mocha --compilers coffee:coffee-script test/test.coffee"
   },
   "devDependencies": {
     "underscore": "~1.5.2",
