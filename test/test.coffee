@@ -94,6 +94,15 @@ describe 'Model', ->
 						converter: ->
 							this.get('firstName') + ' ' + this.get('lastName')
 
+					initials:
+						fields: [
+							'firstName'
+							'lastName'
+						]
+						includeInJSON: true
+						converter: ->
+							this.get('firstName').substr(0, 1) + ' ' + this.get('lastName').substr(0, 1)
+
 		it 'should include depencies in JSON', ->
 			model = new Backbone.Model attributes, options
 			json = model.toJSON()
@@ -108,10 +117,8 @@ describe 'Model', ->
 			assert.isUndefined json.fullName
 
 		it 'should include computed fields if explicitly specified', ->
-			options.computedFields.fullName.includeInJSON = true
-
 			model = new Backbone.Model attributes, options
 			json = model.toJSON()
 
-			assert.isDefined json.fullName
+			assert.isDefined json.initials
 

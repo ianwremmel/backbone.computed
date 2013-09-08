@@ -17,7 +17,8 @@ Right now, things like fullname, roomEmailAddress, bookmarklet, etc, require spe
 
 # TODO
 - Add a grunt UMD builder
-- Convert test suite to an actual test suite
+- Explain differences between this and Backbone.compute.
+- Support use as a mixin or as a direct alteration to Backbone core.
 - Performance Testing
 - Add tests for ModelBinder
 - Add tests Backbone.Relational
