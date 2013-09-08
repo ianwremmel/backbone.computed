@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ianwremmel/backbone.computed.png)](https://travis-ci.org/ianwremmel/backbone.computed)
+
 # Motivation
 
 Right now, things like fullname, roomEmailAddress, bookmarklet, etc, require special methods (and the knowledge of the existence of those methods). There are several existing plugins (or at least code samples) for doing this on the Internet, but the feeback from Derick Bailey and/or Jeremy Ashkenas was positive but hesitant.
