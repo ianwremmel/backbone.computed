@@ -1,7 +1,7 @@
 _ = require 'underscore'
 
 # TODO The plugin shouldn't need to export Backbone.
-Backbone = require '../dist/backbone.computed.js'
+Backbone = require '../.tmp/backbone.computed.js'
 
 chai = require 'chai'
 assert = chai.assert
