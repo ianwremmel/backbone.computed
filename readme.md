@@ -1,26 +1,25 @@
-[![Build Status](https://travis-ci.org/ianwremmel/backbone.computed.png)](https://travis-ci.org/ianwremmel/backbone.computed)
+# Backbone.Computed [![Build Status](https://travis-ci.org/ianwremmel/backbone.computed.png)](https://travis-ci.org/ianwremmel/backbone.computed)
 
-# Motivation
+## Motivation
+Sometimes, attributes need to be manipulated in a consistent, reusable way, but in a fashion that does not (or cannot) be stored. Examples include fullnames based on first and last name or currencies based on a stored value and a recent conversion rate.
 
-Right now, things like fullname, roomEmailAddress, bookmarklet, etc, require special methods (and the knowledge of the existence of those methods). There are several existing plugins (or at least code samples) for doing this on the Internet, but the feeback from Derick Bailey and/or Jeremy Ashkenas was positive but hesitant.
+### Requirements:
+1. [x] Trigger change event when dependent fields change.
+2. [ ] ~~Support assignment model binding plugins.~~
+  - This is quite difficult in the general case, and probably not as useful as it seems.
+3. [x] Support view updates via model binding plugins.
+4. [x] Use same syntax as regular attributes (e.g. model.get('computedAttr')).
+5. [x] The computed values should not be a part of the Model's JSON representation by default.
+6. [x] Computed fields should not be alterable without the developer explicitly indicating he or she is altering a computed field.
 
-# Requirements:
-1. Trigger change event when dependent fields change
-2. Support assignment via ModelBinder.
-3. Trigger updates via ModelBinding.
-4. Use same syntax as regular attributes (e.g. model.get('computedAttr')).
+## Prior Work
 
-- Rather than building out a huge api for emitting events, add a `computedFields` hash to each model that contains a set of dependent fields and a compute function. Store the computed results via `set()`/`get() to trigger change events (this satisfies requirement 1, 3, and 4).
-- Point 2 is impossible in the general case and extremely complex in many of the specific cases. Until we have a use case for it, it's not worth doing.
-- The `computedFields` hash should support `includeInJSON` (`false` by default).
-- `set()` should not allow altering a computed attribute without also passing an `isComputed:true` option (this way, computed field will be kept as read only unless they've been recomputed.
+At the time this plugin was started, the only prior work I found were a few comments from Derick Bailey that seemed positive but hesitant. Apparently, he subsequently wrote [backbone.compute](https://github.com/derickbailey/backbone.compute) and Alexander Beletsky wrote [backbone.computedfields](https://github.com/alexanderbeletsky/backbone-computedfields). Both seem solid, but I have several philosphical issues with each, though the main issue shared by both is the way in which they are initialized. In my opinion, both are overly obtrusive: in addition to putting configuration data on the Model, each requires invoking an initalize method in the Model's `initialize` function. In my opinion, this type of plugin should alter Backbone core either at load time or via a global initialize (at this time, backbone.computed alters core at load time - I intend to change to a global initalize and add eventually add a mixin method).
 
-# TODO
-- Explain differences between this and Backbone.compute.
+## TODO
 - Support use as a mixin or as a direct alteration to Backbone core.
 - Performance Testing
 - Add tests for ModelBinder
-- Add tests Backbone.Relational
 
-# Future
+## Future
 - Investigate bi-directional computation (e.g. split a fullName into a firstName and a lastName)
