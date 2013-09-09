@@ -16,7 +16,6 @@ Right now, things like fullname, roomEmailAddress, bookmarklet, etc, require spe
 - `set()` should not allow altering a computed attribute without also passing an `isComputed:true` option (this way, computed field will be kept as read only unless they've been recomputed.
 
 # TODO
-- Add a grunt UMD builder
 - Explain differences between this and Backbone.compute.
 - Support use as a mixin or as a direct alteration to Backbone core.
 - Performance Testing
