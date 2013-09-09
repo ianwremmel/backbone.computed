@@ -1,10 +1,17 @@
 module.exports = (grunt) ->
+  grunt.loadNpmTasks 'grunt-contrib-clean'
+
   grunt.loadNpmTasks 'grunt-mocha-cli'
   grunt.loadNpmTasks 'grunt-umd'
 
   grunt.initConfig
     pkg:
       grunt.file.readJSON 'package.json'
+
+    clean:
+      dist: [
+        'dist'
+      ]
 
     umd:
       dist:
