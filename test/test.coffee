@@ -51,6 +51,7 @@ describe 'Model', ->
 
 	describe '#computedFields', ->
 		model = null
+		options = null
 
 		beforeEach ->
 			attributes =
@@ -69,11 +70,22 @@ describe 'Model', ->
 
 			model = new Backbone.Model attributes, options
 
-			it 'should create the computed field', ->
-				assert model.has 'fullName'
+		it 'should create the computed field', ->
+			assert model.has 'fullName'
 
-			it 'should initially compute the field from the available attributes', ->
-				assert.equal model.get('fullName'), 'first last'
+		it 'should initially compute the field from the available attributes', ->
+			assert.equal model.get('fullName'), 'first last'
+
+		it 'should work as a function that returns a hash', ->
+			fields = _.clone options.computedFields, true
+
+			options.computedFields = ->
+				fields
+
+			model = new Backbone.Model attributes, options
+
+			assert model.has 'fullName'
+			assert.equal model.get('fullName'), 'first last'
 
 	describe '#toJSON()', ->
 		attributes = null
