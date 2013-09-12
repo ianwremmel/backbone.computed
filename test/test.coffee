@@ -1,5 +1,7 @@
 _ = require 'underscore'
 
+# TODO changes test format from "it should" to "it does".
+
 # TODO The plugin shouldn't need to export Backbone.
 Backbone = require '../.tmp/backbone.computed.js'
 
@@ -52,6 +54,7 @@ describe 'Model', ->
 	describe '#computedFields', ->
 		model = null
 		options = null
+		attributes = null
 
 		beforeEach ->
 			attributes =
@@ -80,12 +83,26 @@ describe 'Model', ->
 			fields = _.clone options.computedFields, true
 
 			options.computedFields = ->
-				fields
+				fullName:
+					fields: [
+						'firstName'
+						'lastName'
+					]
+					converter: ->
+						this.get('firstName') + ' ' + this.get('lastName')
 
 			model = new Backbone.Model attributes, options
 
 			assert model.has 'fullName'
 			assert.equal model.get('fullName'), 'first last'
+
+		it 'should support a function-without-dependencies format'
+
+		it 'should merge with Model.prototype.computedFields'
+
+		it 'should support collections as dependencies'
+
+		it 'should all dot notation to specify properties of collections as depencies'
 
 	describe '#toJSON()', ->
 		attributes = null

@@ -17,12 +17,19 @@ var Model = function(attributes, options) {
   if (this.computedFields || options.computedFields) {
     // Merge the computedFields hash from options with the one on the Model
     // definition, assuming they exist.
-    if (!this.computedFields) {
-      this.computedFields = {};
+    var computedFields = {};
+
+    if (this.computedFields) {
+      // _.result doesn't work here
+      _.extend(computedFields, (typeof this.computedFields === 'function') ? this.computedFields() : this.computedFields);
     }
+
     if (options.computedFields) {
-      _.extend(this.computedFields, options.computedFields);
+      // _.result doesn't work here
+      _.extend(computedFields, (typeof options.computedFields === 'function') ? options.computedFields() : options.computedFields);
     }
+
+    this.computedFields = computedFields;
 
     // Setup easy access to the names of the computedFields
     this.computedAttrs = _.keys(this.computedFields);
