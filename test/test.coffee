@@ -60,6 +60,9 @@ describe 'Model', ->
 			assert.equal model.get('fullName'), 'FIRST last'
 
 	describe '#computedFields', ->
+		describe 'onlyOnce'
+			it 'should prevent recomputing the field if the field already exists'
+
 		model = null
 		options = null
 		attributes = null
@@ -159,3 +162,5 @@ describe 'Model', ->
 
 			assert.isDefined json.initials
 
+	describe '#get()'
+		it 'accepts an options parameter'
