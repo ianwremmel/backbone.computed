@@ -5,7 +5,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-uglify'
 
   grunt.loadNpmTasks 'grunt-mocha-cli'
-  grunt.loadNpmTasks 'grunt-umd'
+  # grunt.loadNpmTasks 'grunt-umd'
 
   grunt.initConfig
     pkg:
@@ -15,9 +15,9 @@ module.exports = (grunt) ->
       dist: [
         'dist'
       ]
-      tmp: [
-        '.tmp'
-      ]
+      # tmp: [
+      #   '.tmp'
+      # ]
 
     jshint:
       options:
@@ -27,16 +27,17 @@ module.exports = (grunt) ->
           src: 'lib'
 
 
-    umd:
-      dist:
-        src: 'lib/backbone.computed.js'
-        dest: '.tmp/backbone.computed.js'
-        objectToExport: 'Backbone'
-        globalAlias: 'root'
-        deps:
-          default: ['Backbone', '_']
-          amd: ['backbone', 'underscore']
-          cjs: ['backbone', 'underscore']
+    # umd:
+    #   dist:
+    #     src: 'lib/backbone.computed.js'
+    #     dest: '.tmp/backbone.computed.js'
+    #     objectToExport: 'Backbone'
+    #     globalAlias: 'Backbone'
+    #     template: 'unit'
+    #     deps:
+    #       default: ['Backbone', '_']
+    #       amd: ['backbone', 'underscore']
+    #       cjs: ['backbone', 'underscore']
 
     mochacli:
       dist: 'test/test.coffee'
@@ -48,7 +49,7 @@ module.exports = (grunt) ->
     copy:
       dist:
         dest: 'dist/backbone.computed.js'
-        src: '.tmp/backbone.computed.js'
+        src: 'lib/backbone.computed.js'
 
     uglify:
       dist:
@@ -56,22 +57,22 @@ module.exports = (grunt) ->
           sourceMap: 'dist/backbone.computed.map'
           mangle: false
         files:
-          'dist/backbone.computed.min.js': '.tmp/backbone.computed.js'
+          'dist/backbone.computed.min.js': 'lib/backbone.computed.js'
 
 
   grunt.registerTask 'default', [
     'clean:dist'
     'jshint:lib'
-    'umd'
+    # 'umd'
     'mochacli'
     'copy'
     'uglify'
-    'clean:tmp'
+    # 'clean:tmp'
   ]
 
   grunt.registerTask 'test', [
     'clean:dist'
-    'umd'
+    # 'umd'
     'mochacli'
-    'clean:tmp'
+    # 'clean:tmp'
   ]

@@ -3,7 +3,7 @@ _ = require 'underscore'
 # TODO changes test format from "it should" to "it does".
 
 # TODO The plugin shouldn't need to export Backbone.
-Backbone = require '../.tmp/backbone.computed.js'
+Backbone = require '../lib/backbone.computed.js'
 
 chai = require 'chai'
 assert = chai.assert
