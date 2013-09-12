@@ -11,6 +11,10 @@
 }(this, function(Backbone, _) {
 'use strict';
 
+if (!Backbone) {
+  throw 'Include backbone.js before backbone.computed.js';
+}
+
 // Duckpunch the Model constructor. Core-Hacking FTW!
 var constructor = Backbone.Model;
 var Model = function(attributes, options) {
@@ -24,7 +28,7 @@ var Model = function(attributes, options) {
       _.extend(computedFields, (typeof this.computedFields === 'function') ? this.computedFields() : this.computedFields);
     }
 
-    if (options.computedFields) {
+    if (options && options.computedFields) {
       // _.result doesn't work here
       _.extend(computedFields, (typeof options.computedFields === 'function') ? options.computedFields() : options.computedFields);
     }
@@ -43,7 +47,12 @@ var Model = function(attributes, options) {
   }
   constructor.apply(this, arguments);
 };
+
 Model.prototype = Backbone.Model.prototype;
+_.each(_.functions(Backbone.Model), function(functionName) {
+  Model[functionName] = Backbone.Model[functionName];
+});
+
 Backbone.Model = Model;
 
 
