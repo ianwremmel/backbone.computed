@@ -1,6 +1,7 @@
 module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-copy'
+  grunt.loadNpmTasks 'grunt-contrib-jshint'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
 
   grunt.loadNpmTasks 'grunt-mocha-cli'
@@ -17,6 +18,14 @@ module.exports = (grunt) ->
       tmp: [
         '.tmp'
       ]
+
+    jshint:
+      options:
+        jshintrc: '.jshintrc'
+      lib:
+        files:
+          src: 'lib'
+
 
     umd:
       dist:
@@ -52,6 +61,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask 'default', [
     'clean:dist'
+    'jshint:lib'
     'umd'
     'mochacli'
     'copy'

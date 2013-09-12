@@ -113,7 +113,5 @@ Backbone.Model.prototype.toJSON = function() {
   return json;
 };
 
-module.exports = Backbone;
-
     return Backbone;
 }));
