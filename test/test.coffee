@@ -60,8 +60,9 @@ describe 'Model', ->
 			assert.equal model.get('fullName'), 'FIRST last'
 
 	describe '#computedFields', ->
-		describe 'onlyOnce'
+		describe 'onlyOnce', ->
 			it 'should prevent recomputing the field if the field already exists'
+			it 'should allow setting the field during fetch'
 
 		model = null
 		options = null
@@ -143,7 +144,7 @@ describe 'Model', ->
 						converter: ->
 							this.get('firstName').substr(0, 1) + ' ' + this.get('lastName').substr(0, 1)
 
-		it 'should include depencies in JSON', ->
+		it 'should include dependencies in JSON', ->
 			model = new Backbone.Model attributes, options
 			json = model.toJSON()
 
@@ -162,5 +163,5 @@ describe 'Model', ->
 
 			assert.isDefined json.initials
 
-	describe '#get()'
+	describe '#get()', ->
 		it 'accepts an options parameter'
