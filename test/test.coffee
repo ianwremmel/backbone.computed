@@ -13,7 +13,9 @@ describe 'Model', ->
   it 'should not break Model inheritance', ->
     assert.isFunction Backbone.Model.extend
 
-  it 'should not require `options` to be passed to the constructor'
+  it 'should not require `options` to be passed to the constructor', ->
+    assert.doesNotThrow ->
+      m = new Backbone.Model
 
   it 'should not require `attributes` to be passed to the constructor'
 
