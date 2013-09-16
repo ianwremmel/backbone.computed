@@ -53,6 +53,7 @@
     constructor.apply(this, arguments);
   };
 
+  // TODO investigate better ways to migrate the prototype
   Model.prototype = Backbone.Model.prototype;
   _.each(_.functions(Backbone.Model), function(functionName) {
     Model[functionName] = Backbone.Model[functionName];
@@ -111,7 +112,7 @@
       }, this);
     }
 
-    set.apply(this, arguments);
+    return set.apply(this, arguments);
   };
 
   var toJSON = Backbone.Model.prototype.toJSON;

@@ -17,7 +17,9 @@ describe 'Model', ->
     assert.doesNotThrow ->
       m = new Backbone.Model
 
-  it 'should not require `attributes` to be passed to the constructor'
+  it 'should not require `attributes` to be passed to the constructor', ->
+    assert.doesNotThrow ->
+      m = new Backbone.Model
 
   describe '#set()', ->
     model = null
