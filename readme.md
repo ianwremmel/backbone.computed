@@ -76,6 +76,9 @@ The function for computing the fields value. `this` refers to the model instance
 - Support use as a mixin or as a direct alteration to Backbone core.
 - Performance Testing
 - Add tests for ModelBinder
+- Reintegrate grunt-umd
+- converter should receive changes, previous values
+- converter should only be called once if multiple changes occur
 
 ## Future
 - Investigate bi-directional computation (e.g. split a fullName into a firstName and a lastName)

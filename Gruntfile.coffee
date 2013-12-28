@@ -1,11 +1,18 @@
 module.exports = (grunt) ->
-  grunt.loadNpmTasks 'grunt-contrib-clean'
-  grunt.loadNpmTasks 'grunt-contrib-copy'
-  grunt.loadNpmTasks 'grunt-contrib-jshint'
-  grunt.loadNpmTasks 'grunt-contrib-uglify'
+  require('load-grunt-tasks')(grunt)
 
-  grunt.loadNpmTasks 'grunt-mocha-cli'
-  # grunt.loadNpmTasks 'grunt-umd'
+  grunt.registerTask 'build', [
+    'clean'
+    'jshint'
+    'browserify'
+  ]
+
+  grunt.registerTask 'test', [
+    'build'
+    'mochacli'
+  ]
+
+  grunt.registerTask 'default', ['test']
 
   grunt.initConfig
     pkg:
@@ -15,64 +22,33 @@ module.exports = (grunt) ->
       dist: [
         'dist'
       ]
-      # tmp: [
-      #   '.tmp'
-      # ]
 
     jshint:
       options:
+        reporter: require('jshint-stylish')
         jshintrc: '.jshintrc'
-      lib:
-        files:
-          src: 'lib'
+      src: [
+        'lib'
+      ]
 
-
-    # umd:
-    #   dist:
-    #     src: 'lib/backbone.computed.js'
-    #     dest: '.tmp/backbone.computed.js'
-    #     objectToExport: 'Backbone'
-    #     globalAlias: 'Backbone'
-    #     template: 'unit'
-    #     deps:
-    #       default: ['Backbone', '_']
-    #       amd: ['backbone', 'underscore']
-    #       cjs: ['backbone', 'underscore']
+    browserify:
+      dist:
+        src: 'lib/backbone.computed.js'
+        dest: 'dist/backbone.computed.js'
+        options:
+          # TODO place common libraries here (lodash, jquery, etc), to prevent
+          # them being included in the output file. It will be up to the
+          # library's consumer to supply these dependencies.
+          external: [
+            'backbone'
+            'underscore'
+          ]
+          # The library will be available as backbone.computed
+          standalone: 'backbone.computed'
 
     mochacli:
-      dist: 'test/test.coffee'
       options:
         compilers:[
           'coffee:coffee-script'
         ]
-
-    copy:
-      dist:
-        dest: 'dist/backbone.computed.js'
-        src: 'lib/backbone.computed.js'
-
-    uglify:
-      dist:
-        options:
-          sourceMap: 'dist/backbone.computed.map'
-          mangle: false
-        files:
-          'dist/backbone.computed.min.js': 'lib/backbone.computed.js'
-
-
-  grunt.registerTask 'default', [
-    'clean:dist'
-    'jshint:lib'
-    # 'umd'
-    'mochacli'
-    'copy'
-    'uglify'
-    # 'clean:tmp'
-  ]
-
-  grunt.registerTask 'test', [
-    'clean:dist'
-    # 'umd'
-    'mochacli'
-    # 'clean:tmp'
-  ]
+      spec: 'test/test.coffee'

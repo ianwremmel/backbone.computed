@@ -3,7 +3,8 @@ _ = require 'underscore'
 # TODO changes test format from "it should" to "it does".
 
 # TODO The plugin shouldn't need to export Backbone.
-Backbone = require '../lib/backbone.computed.js'
+Backbone = require 'backbone'
+require '../lib/backbone.computed.js'
 
 chai = require 'chai'
 assert = chai.assert
@@ -20,6 +21,9 @@ describe 'Model', ->
   it 'should not require `attributes` to be passed to the constructor', ->
     assert.doesNotThrow ->
       m = new Backbone.Model
+
+  it 'should not prevent fetch from being called multiple times'
+    # Collection.fetch() may attempt to set computed fields without the isComputed parameter (even fields not retrieved from the server).
 
   describe '#set()', ->
     model = null
