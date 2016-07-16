@@ -1,4 +1,4 @@
-# Backbone.Computed [![Build Status](https://travis-ci.org/ianwremmel/backbone.computed.png)](https://travis-ci.org/ianwremmel/backbone.computed)
+# Backbone.Computed [![Build Status](https://travis-ci.org/ianwremmel/backbone.computed.png)](https://travis-ci.org/ianwremmel/backbone.computed) [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
 ## Motivation
 Sometimes, attributes need to be manipulated in a consistent, reusable way, but in a fashion that does not (or cannot) be stored. Examples include fullnames based on first and last name or currencies based on a stored value and a recent conversion rate.
